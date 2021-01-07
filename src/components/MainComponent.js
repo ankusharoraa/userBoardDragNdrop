@@ -5,8 +5,6 @@ import { DragDropContext } from 'react-beautiful-dnd';
 const MainComponent = () => {
     const [editModal, setEditModal] = useState(false)
     const editToggle = () =>setEditModal(!editModal)
-    const [editTask, setEditTask] = useState(false)
-    const editToggleTask = () =>setEditTask(!editTask)
     const [modal, setModal] = useState(false);
     const [taskModal, setTaskModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -20,7 +18,6 @@ const MainComponent = () => {
     const [task, setTasks] = useState([])
     const [multiple, setMultiple] = useState([])
     const [columns, setColumns] = useState({})
-    // const [taskObject, setTaskObject] = useState({})
     const [initialData, setInitialData] = useState(
         {
             tasks: {
@@ -35,7 +32,6 @@ const MainComponent = () => {
         let newInitialData = { ...initialData }
         newInitialData.tasks[taskId].content = editedValue
         setInitialData(newInitialData)
-        setEditTask(false)
     }
     //Edit Column logic
     const editColumn = (columniD,editedValue) => {
@@ -102,7 +98,7 @@ const MainComponent = () => {
             let newInitialData = { ...initialData }
             newInitialData.coloumns[`${start.id}`].taskIds = startTaskIds
             newInitialData.coloumns[`${finish.id}`].taskIds = finishtaskIds
-            console.log(newInitialData)
+            // console.log(newInitialData)
             setInitialData(newInitialData)
         }
 
@@ -194,14 +190,10 @@ const MainComponent = () => {
         }
     }, [modal])
 
-    useEffect(() => {
-        if (taskModal === true) {
-            document.getElementById("taskInput").focus()
-        }
-    }, [taskModal])
+
 
     useEffect(() => {
-        console.log(columns)
+        // console.log(columns)
         // eslint-disable-next-line
     }, [initialData])
 
@@ -229,7 +221,7 @@ const MainComponent = () => {
                         );
                         return (
                             <div className='col-sm-2 col-7'>
-                                <Column key={columnId.id} editTaskFunc = {editTaskFunc} editTask={editTask} editToggleTask = {editToggleTask} editToggle = {editToggle} editColumn={editColumn} editModal = {editModal} deleteColumn={deleteColumn} deleteTask={deleteTask} taskToggle={taskToggle} taskModal={taskModal} taskNew={tasksNew} saveDetails={saveDetails} onValueEntered={(e) => onValueEntered(e)} columns={columnsNew} initialData={initialData} />
+                                <Column key={columnId.id} editTaskFunc = {editTaskFunc}  editToggle = {editToggle} editColumn={editColumn} editModal = {editModal} deleteColumn={deleteColumn} deleteTask={deleteTask} taskToggle={taskToggle} taskModal={taskModal} taskNew={tasksNew} saveDetails={saveDetails} onValueEntered={(e) => onValueEntered(e)} columns={columnsNew} initialData={initialData} />
                             </div>
                         )
                     }

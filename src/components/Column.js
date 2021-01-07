@@ -30,7 +30,10 @@ const Column = (props) => {
                         {props.taskNew.map((task, index) => {
                             return (
                                 <div>
-                                    <Tasks editTaskFunc ={props.editTaskFunc} editTask={props.editTask} editToggleTask = {props.editToggleTask} deleteTask={props.deleteTask} initialData={props.initialData} key={task.id.toString()} task={task} index={index} columnId={props.columns.id} />
+                                    <Tasks editTaskFunc ={props.editTaskFunc} editTask={props.editTask} 
+                                    editToggleTask = {props.editToggleTask} deleteTask={props.deleteTask} 
+                                    initialData={props.initialData} key={task.id.toString()} 
+                                    task={task} index={index} columnId={props.columns.id} />
                                 </div>
                             )
                         })}
@@ -47,7 +50,7 @@ const Column = (props) => {
             <Modal isOpen={props.taskModal} toggle={props.taskToggle}>
                 <ModalHeader>Enter Task</ModalHeader>
                 <ModalBody>
-                    <Input id='taskInput' onChange={props.onValueEntered}></Input>
+                    <Input onChange={props.onValueEntered}></Input>
                     <div className='addUser'>
                         <Button id='saveTask' className='btn btn-warning' onClick={props.saveDetails}>Save</Button>
                     </div>

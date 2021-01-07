@@ -9,6 +9,15 @@ const Tasks = (props) => {
     }
     const [editTaskValue,setEditTaskValue] = useState('')
     const onEditTaskValue = (e) => setEditTaskValue(e.target.value)
+
+    const [editTask, setEditTask] = useState(false)
+    const [editTaskId, setEditTaskId] = useState('')
+    const assignTaskId = (id) =>{
+        setEditTaskId(id);
+        editToggleTask()
+
+    }
+    const editToggleTask = () => setEditTask(!editTask)
     return (
         <>
             <Draggable draggableId={props.task.id.toString()} index={props.index}>
@@ -24,7 +33,7 @@ const Tasks = (props) => {
                                         <p>{props.task.content}</p>
                                     </div>
                                     <div className='col-md-4'>
-                                        <button className='btn btn-warning' onClick = {props.editToggleTask}><i className="fa fa-edit"></i></button>
+                                        <button className='btn btn-warning' onClick = {()=>assignTaskId(props.task.id)}><i className="fa fa-edit"></i></button>
                                         <button onClick={toggle} className='btn btn-danger'><i className='fa fa-trash'></i></button>
 
                                     </div>
@@ -44,15 +53,15 @@ const Tasks = (props) => {
                 </ModalBody>
             </Modal>
 
-            <Modal isOpen={props.editTask} toggle={props.editToggleTask}>
+            <Modal isOpen={editTask} toggle={editToggleTask}>
                 <ModalHeader>Give this task a different task name..</ModalHeader>
                 <ModalBody className='d-flex justify-content-end'>
                     <Input onChange={onEditTaskValue}></Input>
                     <div className='addUser'>
                         <Button style={{ width: '90px', marginLeft: '10px' }}
-                         onClick={() => props.editTaskFunc(props.task.id.toString(),editTaskValue)} color='danger'>Save</Button>
+                         onClick={() => props.editTaskFunc(editTaskId,editTaskValue)} color='danger'>Save</Button>
                         <Button style={{ marginLeft: '10px', width: '90px' }} color='warning' 
-                        onClick={props.editToggleTask}>Cancel</Button></div>
+                        onClick={editToggleTask}>Cancel</Button></div>
                 </ModalBody>
             </Modal>
 
